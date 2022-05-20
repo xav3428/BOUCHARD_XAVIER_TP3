@@ -28,6 +28,7 @@ Material:
         m_Texture: {fileID: 2800000, guid: 282028860199a5f49a51216f309f1410, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    m_Ints: []
     m_Floats:
     - _Coverage: 0.24
     - _Noise01Power: 1
@@ -45,3 +46,4 @@ Material:
     - _CloudsColor: {r: 0.366901, g: 0.68220174, b: 0.9150943, a: 1}
     - _DirectionSpeed: {r: 6.5, g: 7.8, b: 5.2, a: -7}
     - _ScatteringColor: {r: 1, g: 1, b: 1, a: 1}
+  m_BuildTextureStacks: []

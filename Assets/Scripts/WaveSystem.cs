@@ -7,14 +7,13 @@ public class WaveSystem : MonoBehaviour
     // Variables
     public static WaveSystem waveSystem;
     int round = 0;
-    public int numberToSpawn = 4;
-    public int numberToAddEachRound = 4;
+    public int numberToSpawn = 5;
+    public int numberToAddEachRound = 5;
     bool waveQueued = false;
     public GameObject zombie;
     private System.Random random = new System.Random();
     private List<GameObject> listZombies = new List<GameObject>();
     [SerializeField] private List<GameObject> listSpawnpoint = new List<GameObject>();
-    Transform spawnPoint;
 
 
     // Accessible properties

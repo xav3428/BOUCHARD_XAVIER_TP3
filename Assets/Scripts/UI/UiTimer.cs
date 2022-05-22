@@ -6,8 +6,7 @@ using TMPro;
 
 public class UiTimer : MonoBehaviour
 {
-    public TMP_Text TimerText;
-    public bool playing;
+    public Text TimerText;
     private float Timer;
 
     // Update is called once per frame

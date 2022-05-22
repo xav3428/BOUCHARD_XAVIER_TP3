@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Zombie : MonoBehaviour
+public class Zombie : MonoBehaviour, IDamageable
 {
     // Variable for the health of the zombie
     int health;
@@ -18,16 +18,10 @@ public class Zombie : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        health = 1;
+        health = 1 + 1 * WaveSystem.waveSystem.Round - 1;
         player = GameObject.FindGameObjectWithTag("Player").transform;
         animator = GetComponent<Animator>();
         SetTarget(player.transform);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     void UpdateDestination()
@@ -63,12 +57,14 @@ public class Zombie : MonoBehaviour
     public void Die()
     {
         CancelInvoke("UpdateDestination");
+        WaveSystem.waveSystem.RemoveZombieFromList(gameObject);
         Destroy(gameObject);
     }
 
-    public void ApplyDamage()
+    public void TakeDamage(int damage)
     {
-        health -= 1;
+        Debug.Log("ouch");
+        health -= damage;
 
         if (health <= 0)
         {
@@ -83,9 +79,9 @@ public class Zombie : MonoBehaviour
         player = player_t;
 
         // À toutes les secondes, le zombie ajustera la position de sa cible
-        InvokeRepeating("UpdateDestination", 0.1f, 1f);
+        InvokeRepeating("UpdateDestination", 0.05f, 1f);
 
         // À toutes les 0.5s, le zombie vérifie si le joueur est a proximité (si oui, c'est game over)
-        InvokeRepeating("PlayerProximityCheck", 0.1f, 0.5f);
+        InvokeRepeating("PlayerProximityCheck", 0.05f, 0.5f);
     }
 }

@@ -85,7 +85,7 @@ public class WaveSystem : MonoBehaviour
         listZombies.Add(enemy);
     }
 
-    public void RemoveEnemyFromList(GameObject enemy)
+    public void RemoveZombieFromList(GameObject enemy)
     {
         listZombies.Remove(enemy);
     }

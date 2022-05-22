@@ -13,8 +13,8 @@ public class WaveSystem : MonoBehaviour
     public GameObject zombie;
     private System.Random random = new System.Random();
     private List<GameObject> listZombies = new List<GameObject>();
-    [SerializeField] private List<Vector3> listSpawnpoint = new List<Vector3>();
-    Vector3 spawnPoint;
+    [SerializeField] private List<GameObject> listSpawnpoint = new List<GameObject>();
+    Transform spawnPoint;
 
 
     // Accessible properties
@@ -67,14 +67,13 @@ public class WaveSystem : MonoBehaviour
 
     int generateRandomIndex()
     {
-        // We roll a dice for a number between 1 to 3 to randomly select the next type of enemy to spawn
-        random = new System.Random();
+        // We roll an index of the list of spawns to randomly spawn the zombies at different places
         return random.Next(listSpawnpoint.Count);
     }
 
     Vector3 selectRandomSpawnPoint()
     {
-        return listSpawnpoint[generateRandomIndex()];
+        return listSpawnpoint[generateRandomIndex()].transform.position;
     }
 
     void spawnEnemy()
@@ -96,6 +95,5 @@ public class WaveSystem : MonoBehaviour
         // We add the enemy to the monster list to easily have access to all monster later in the game
         GameObject enemy = Instantiate(monster, appearanceTransform, Quaternion.identity);
         addEnemyToList(enemy);
-        enemy.GetComponent<Enemy>().SetEnemyHP();
     }
 }

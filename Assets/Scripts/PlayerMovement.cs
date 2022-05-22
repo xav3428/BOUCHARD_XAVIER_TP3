@@ -17,6 +17,8 @@ public class PlayerMovement : MonoBehaviour {
 
     private Animator animatorCharacter;
 
+    private float previousDirectionY;
+
 	void Start () {
         m_charCont = GetComponent<CharacterController>();
 
@@ -31,9 +33,11 @@ public class PlayerMovement : MonoBehaviour {
         animatorCharacter.SetFloat("Horizontal", rightDirection);
         animatorCharacter.SetFloat("Vertical", forwardDirection);
 
-        Vector3 m_playerMovement = new Vector3(m_horizontal, 0f, m_vertical) * PlayerSpeed * Time.deltaTime;
+        Vector3 m_playerMovement = new Vector3(m_horizontal, 0f, m_vertical) ;
 
-        m_charCont.Move(m_playerMovement);
+        m_playerMovement.y -= gravity * Time.deltaTime;
+
+        m_charCont.Move(m_playerMovement * PlayerSpeed * Time.deltaTime);
 
         
     }

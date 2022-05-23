@@ -11,6 +11,7 @@ public class Gun : MonoBehaviour
 
     [Header("Audio")]
     [SerializeField] private AudioClip clipGunFire;
+    [SerializeField] private AudioClip clipReload;
     [SerializeField] private AudioSource audioplayer;
     [Header("Particles")]
     [SerializeField] private ParticleSystem ARSparks;
@@ -43,6 +44,7 @@ public class Gun : MonoBehaviour
 
     private IEnumerator Reload()
     {
+        audioplayer.PlayOneShot(clipReload);
         gunData.reloading = true;
 
         yield return new WaitForSeconds(gunData.reloadTime);

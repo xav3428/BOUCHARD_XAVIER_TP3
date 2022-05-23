@@ -10,6 +10,8 @@ public class Zombie : MonoBehaviour, IDamageable
 
     // Variable where the player`s position will be stored
     [SerializeField] private Transform player;
+
+    [SerializeField] private ParticleSystem blood;
     // Variable to store our own mesh agent
     NavMeshAgent agent;
     Animator animator;
@@ -40,7 +42,7 @@ public class Zombie : MonoBehaviour, IDamageable
             return;
 
         // Récupère tous les colliders à proximité
-        Collider[] colliders = Physics.OverlapSphere(transform.position, 0.4f);
+        Collider[] colliders = Physics.OverlapSphere(transform.position, 1f);
 
         foreach (var item in colliders)
         {
@@ -57,13 +59,14 @@ public class Zombie : MonoBehaviour, IDamageable
     public void Die()
     {
         CancelInvoke("UpdateDestination");
+        StatClass.statClass.addAKill();
         WaveSystem.waveSystem.RemoveZombieFromList(gameObject);
         Destroy(gameObject);
     }
 
     public void TakeDamage(int damage)
     {
-        Debug.Log("ouch");
+        blood.Play();
         health -= damage;
 
         if (health <= 0)
